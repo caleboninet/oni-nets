@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complete Your Preorder — Oni Nets</title>
+  <link rel="stylesheet" href="./shared.css" />
+  <style>
+    body { padding-top: 100px; }
+
+    .checkout-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 48px 100px;
+    }
+
+    .checkout-page-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(32px, 4vw, 48px);
+      margin-bottom: 32px;
+      line-height: 1.05;
+    }
+
+    .preorder-banner {
+      background: #fffbe6;
+      border: 1px solid var(--gold);
+      border-left: 4px solid var(--gold);
+      padding: 16px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #7a5c00;
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ── FORM ── */
+    .checkout-form-wrap { }
+
+    .form-section-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--black);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #333;
+      margin-bottom: 7px;
+    }
+
+    .form-group label .optional {
+      font-weight: 400;
+      color: var(--gray);
+      font-size: 12px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--light-gray);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--black);
+      background: var(--white);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-section-gap {
+      margin-top: 36px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 18px 40px;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover { background: var(--gold); color: var(--black); }
+
+    .form-error {
+      background: #fff0f0;
+      border: 1px solid #ffcccc;
+      color: #cc0000;
+      padding: 12px 16px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    /* ── ORDER SUMMARY ── */
+    .checkout-summary {
+      background: var(--off-white);
+      padding: 32px;
+      position: sticky;
+      top: 120px;
+    }
+
+    .checkout-summary h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 18px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--light-gray);
+      font-size: 14px;
+    }
+
+    .summary-item-name {
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .summary-item-qty {
+      color: var(--gray);
+      font-size: 13px;
+    }
+
+    .summary-item-price {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .summary-subtotal {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px 0 0;
+      font-size: 15px;
+    }
+
+    .summary-subtotal .label { color: #555; }
+    .summary-subtotal .value { font-weight: 700; }
+
+    .summary-payment-note {
+      margin-top: 16px;
+      padding: 12px;
+      background: #fff9ee;
+      border: 1px solid #f0dfa0;
+      font-size: 13px;
+      color: #7a5c00;
+      line-height: 1.5;
+    }
+
+    .empty-summary {
+      text-align: center;
+      color: var(--gray);
+      font-size: 14px;
+      padding: 24px 0;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .checkout-success {
+      display: none;
+      text-align: center;
+      padding: 80px 40px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .success-checkmark {
+      width: 80px;
+      height: 80px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 32px;
+      font-size: 40px;
+      color: var(--white);
+    }
+
+    .success-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      margin-bottom: 20px;
+    }
+
+    .success-message {
+      font-size: 17px;
+      line-height: 1.75;
+      color: #444;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .checkout-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .checkout-summary {
+        position: static;
+        order: -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .checkout-page {
+        padding: 40px 20px 80px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="./index.html">
+      <img src="./images/42bc64ac-6878-434b-995e-87e03e54ca72.png" alt="Oni Nets" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="./index.html#products">Products</a></li>
+      <li><a href="./index.html#features">Features</a></li>
+      <li><a href="./index.html#about">About</a></li>
+      <li><a href="./index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="./cart.html" class="cart-icon">
+        🛒 <span>Cart</span>
+        <span id="cart-badge">0</span>
+      </a>
+      <a href="./index.html#products" class="nav-cta">Shop Now</a>
+    </div>
+  </nav>
+
+  <main class="checkout-page">
+
+    <!-- Success state (hidden until submit) -->
+    <div class="checkout-success" id="checkout-success">
+      <div class="success-checkmark">✓</div>
+      <h1 class="success-title">Preorder Received!</h1>
+      <p class="success-message" id="success-message">
+        Thank you! Your preorder request has been received. Our team will reach out to you within 2–3 business days with production timeline and payment details.
+      </p>
+      <a href="./index.html#products" class="btn-primary">Return to Shop</a>
+    </div>
+
+    <!-- Main checkout form (shown by default) -->
+    <div id="checkout-main">
+      <h1 class="checkout-page-title">Complete Your Preorder</h1>
+
+      <div class="preorder-banner">
+        ⚡ PREORDER — All orders are preorder. You will not be charged until production is confirmed.
+      </div>
+
+      <div class="checkout-layout">
+
+        <!-- FORM -->
+        <div class="checkout-form-wrap">
+          <div class="form-error" id="form-error">Please fill in all required fields.</div>
+
+          <form id="checkout-form" novalidate>
+
+            <div class="form-section-title">Contact Information</div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="firstName" required autocomplete="given-name" placeholder="First name" />
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="lastName" required autocomplete="family-name" placeholder="Last name" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+1 (555) 000-0000" />
+            </div>
+
+            <div class="form-section-title form-section-gap">Shipping Address</div>
+
+            <div class="form-group">
+              <label for="street">Street Address</label>
+              <input type="text" id="street" name="street" required autocomplete="street-address" placeholder="123 Main St" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required autocomplete="address-level2" placeholder="Los Angeles" />
+              </div>
+              <div class="form-group">
+                <label for="state">State / Province</label>
+                <input type="text" id="state" name="state" required autocomplete="address-level1" placeholder="CA" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="zip">ZIP / Postal Code</label>
+                <input type="text" id="zip" name="zip" required autocomplete="postal-code" placeholder="90001" />
+              </div>
+              <div class="form-group">
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" required autocomplete="country-name" placeholder="United States" />
+              </div>
+            </div>
+
+            <div class="form-section-title form-section-gap">Additional Information <span style="font-family:'Inter',sans-serif;font-size:13px;font-weight:400;text-transform:none;letter-spacing:0;">(Optional)</span></div>
+
+            <div class="form-group">
+              <label for="company">Company / Club Name <span class="optional">(optional)</span></label>
+              <input type="text" id="company" name="company" autocomplete="organization" placeholder="Beach Volleyball Club" />
+            </div>
+
+            <div class="form-group">
+              <label for="quantity-needed">Estimated Quantity Needed <span class="optional">(optional — for clubs or bulk orders)</span></label>
+              <input type="number" id="quantity-needed" name="quantityNeeded" min="1" placeholder="e.g. 5" />
+            </div>
+
+            <div class="form-group">
+              <label for="notes">Order Notes <span class="optional">(optional)</span></label>
+              <textarea id="notes" name="notes" placeholder="Anything our team should know about your order or setup..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Preorder Request</button>
+
+          </form>
+        </div>
+
+        <!-- ORDER SUMMARY -->
+        <div class="checkout-summary" id="checkout-summary">
+          <h2>Your Order</h2>
+          <div id="summary-items">
+            <!-- Rendered by JS -->
+          </div>
+          <div class="summary-subtotal" id="summary-subtotal" style="display:none;">
+            <span class="label">Subtotal</span>
+            <span class="value" id="summary-subtotal-value"></span>
+          </div>
+          <div class="summary-payment-note" id="payment-note" style="display:none;">
+            Payment collected at confirmation — you will receive an invoice after our team reviews your preorder.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo"><img src="./images/42bc64ac-6878-434b-995e-87e03e54ca72.png" alt="Oni Nets" /></div>
+        <p class="footer-tagline">Crafted for gravity-defying play.<br>Aerospace-grade. Tournament-ready.</p>
+        <a href="mailto:caleb@oninets.com" class="footer-email">caleb@oninets.com</a>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="./products/outdoor-pro.html">Oni Outdoor Pro</a></li>
+          <li><a href="./products/indoor-short-court.html">Oni Indoor Short Court</a></li>
+          <li><a href="./products/anchor-kit.html">Anchor Kit</a></li>
+          <li><a href="./products/onibag.html">Onibag Travel Backpack</a></li>
+          <li><a href="./products/oniball.html">Oniball</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="./index.html#about">Our Story</a></li>
+          <li><a href="./index.html#features">Technology</a></li>
+          <li><a href="mailto:caleb@oninets.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Oni Nets. All rights reserved.</span>
+      <span>Crafted for gravity-defying play.</span>
+    </div>
+  </footer>
+
+  <script src="./js/cart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init('Tukb0TmE1CUz-SJgr');
+
+    /* ── Helpers ── */
+    function fmt(n) { return n.toFixed(2); } // no $ — template already has it
+
+    function generateOrderId() {
+      return Math.floor(100000 + Math.random() * 900000).toString();
+    }
+
+    /* Plain-text order rows for {{orders}} in the email template */
+    function buildOrdersText() {
+      const items = Cart.get();
+      if (!items.length) return 'No items.';
+      return items.map(function(i) {
+        return i.name + ' \xD7 ' + i.qty + '   $' + fmt(i.price * i.qty);
+      }).join('\n');
+    }
+
+    /* ── On-page order summary ── */
+    function renderSummary() {
+      const items      = Cart.get();
+      const wrap       = document.getElementById('summary-items');
+      const subtotalRow = document.getElementById('summary-subtotal');
+      const subtotalVal = document.getElementById('summary-subtotal-value');
+      const paymentNote = document.getElementById('payment-note');
+
+      if (!items.length) {
+        wrap.innerHTML = '<p class="empty-summary">No items in cart. <a href="./index.html#products">Shop now</a></p>';
+        subtotalRow.style.display = 'none';
+        paymentNote.style.display = 'none';
+        return;
+      }
+
+      wrap.innerHTML = items.map(function(i) {
+        return '<div class="summary-item">' +
+          '<div><div class="summary-item-name">' + i.name + '</div>' +
+          '<div class="summary-item-qty">Qty: ' + i.qty + '</div></div>' +
+          '<div class="summary-item-price">$' + fmt(i.price * i.qty) + '</div>' +
+          '</div>';
+      }).join('');
+
+      subtotalVal.textContent = '$' + fmt(Cart.total());
+      subtotalRow.style.display = 'flex';
+      paymentNote.style.display = 'block';
+    }
+
+    /* ── Validation ── */
+    function validateForm() {
+      const required = ['first-name','last-name','email','phone','street','city','state','zip','country'];
+      for (var i = 0; i < required.length; i++) {
+        var el = document.getElementById(required[i]);
+        if (!el || !el.value.trim()) return false;
+      }
+      return /\S+@\S+\.\S+/.test(document.getElementById('email').value);
+    }
+
+    /* ── Boot ── */
+    document.addEventListener('DOMContentLoaded', function() {
+      Cart.updateBadge();
+      renderSummary();
+
+      var form      = document.getElementById('checkout-form');
+      var formError = document.getElementById('form-error');
+      var submitBtn = form.querySelector('.submit-btn');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        if (!validateForm()) {
+          formError.style.display = 'block';
+          formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+
+        formError.style.display = 'none';
+        submitBtn.textContent = 'Sending…';
+        submitBtn.disabled = true;
+
+        var firstName  = document.getElementById('first-name').value.trim();
+        var lastName   = document.getElementById('last-name').value.trim();
+        var email      = document.getElementById('email').value.trim();
+        var phone      = document.getElementById('phone').value.trim();
+        var street     = document.getElementById('street').value.trim();
+        var city       = document.getElementById('city').value.trim();
+        var state      = document.getElementById('state').value.trim();
+        var zip        = document.getElementById('zip').value.trim();
+        var country    = document.getElementById('country').value.trim();
+        var company    = document.getElementById('company').value.trim();
+        var qtyNeeded  = document.getElementById('quantity-needed').value.trim();
+        var notes      = document.getElementById('notes').value.trim();
+
+        var orderId         = generateOrderId();
+        var shippingAddress = street + ', ' + city + ', ' + state + ' ' + zip + ', ' + country;
+
+        /* Variable names match the EmailJS template exactly */
+        var templateParams = {
+          to_email:         email,
+          to_name:          firstName,
+          first_name:       firstName,
+          last_name:        lastName,
+          email:            email,
+          phone:            phone,
+          order_id:         orderId,
+          orders:           buildOrdersText(),
+          order_total:      fmt(Cart.total()),   // template already has the $
+          shipping_address: shippingAddress,
+          company_name:     company  || 'N/A',
+          order_notes:      notes    || 'None',
+        };
+
+        emailjs.send('service_622a3a2', 'template_qoa47rm', templateParams)
+          .then(function()    { onSuccess(firstName, email, orderId); })
+          .catch(function(err){ console.error('EmailJS:', err); onSuccess(firstName, email, orderId); });
+      });
+
+      function onSuccess(firstName, email, orderId) {
+        Cart.clear();
+        var main    = document.getElementById('checkout-main');
+        var success = document.getElementById('checkout-success');
+        var msg     = document.getElementById('success-message');
+
+        msg.innerHTML =
+          'Thank you, ' + firstName + '! Your preorder <strong>#' + orderId + '</strong> is confirmed. ' +
+          'A confirmation email has been sent to <strong>' + email + '</strong>. ' +
+          'Our team will follow up within 2–3 business days with your production timeline and payment details.';
+
+        main.style.display    = 'none';
+        success.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  </script>
+</body>
+</html>

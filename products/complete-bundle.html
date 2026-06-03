@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complete Bundle — Oni Nets</title>
+  <link rel="stylesheet" href="../shared.css" />
+  <style>
+    body { padding-top: 100px; }
+
+    .product-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 48px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .product-image-wrap {
+      aspect-ratio: 1 / 1;
+      background: var(--off-white);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 120px;
+    }
+
+    .product-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .product-label {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      margin-bottom: 20px;
+    }
+
+    .product-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .product-price {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+
+    .product-description {
+      font-size: 17px;
+      line-height: 1.75;
+      color: #444;
+      margin-bottom: 32px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--light-gray);
+      margin: 32px 0;
+    }
+
+    .features-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .features-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .features-list li .check {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .specs-section h3 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--light-gray);
+    }
+
+    .spec-row { display: contents; }
+
+    .spec-label, .spec-value {
+      padding: 12px 16px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .spec-label {
+      font-weight: 600;
+      color: #555;
+      background: var(--off-white);
+    }
+
+    .spec-value { color: var(--black); }
+
+    .spec-row:last-child .spec-label,
+    .spec-row:last-child .spec-value { border-bottom: none; }
+
+    .bundle-includes {
+      background: var(--off-white);
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+
+    .bundle-includes h3 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .bundle-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bundle-items li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .bundle-items li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .bundle-items .item-name { font-weight: 500; }
+    .bundle-items .item-price { color: var(--gray); }
+
+    .qty-section { margin-bottom: 20px; }
+
+    .qty-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      border: 1px solid var(--light-gray);
+    }
+
+    .qty-btn {
+      width: 44px;
+      height: 44px;
+      background: var(--white);
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--black);
+      transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .qty-btn:hover { background: var(--off-white); }
+
+    .qty-input {
+      width: 60px;
+      height: 44px;
+      border: none;
+      border-left: 1px solid var(--light-gray);
+      border-right: 1px solid var(--light-gray);
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--black);
+      background: var(--white);
+      outline: none;
+    }
+
+    .add-to-cart-btn {
+      width: 100%;
+      padding: 18px 40px;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-bottom: 16px;
+    }
+
+    .add-to-cart-btn:hover { background: var(--gold); color: var(--black); }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--black); }
+
+    .cart-confirm {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: #f0f7f0;
+      border: 1px solid #c3e0c3;
+      color: #2d6a2d;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .product-page {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 40px 20px 80px;
+      }
+
+      .product-image-wrap { position: static; }
+      .specs-grid { grid-template-columns: 1fr; }
+      .spec-label { border-bottom: none; padding-bottom: 4px; }
+      .spec-value { padding-top: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="../index.html">
+      <img src="../images/42bc64ac-6878-434b-995e-87e03e54ca72.png" alt="Oni Nets" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../index.html#products">Products</a></li>
+      <li><a href="../index.html#features">Features</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="../cart.html" class="cart-icon">
+        🛒 <span>Cart</span>
+        <span id="cart-badge">0</span>
+      </a>
+      <a href="../index.html#products" class="nav-cta">Shop Now</a>
+    </div>
+  </nav>
+
+  <main class="product-page">
+    <div class="product-image-wrap">
+      <img src="../images/gear-spread.png" alt="Oni Complete Bundle" />
+    </div>
+
+    <div class="product-detail">
+      <span class="product-label">Best Value</span>
+      <h1 class="product-title">Complete Bundle</h1>
+      <div class="product-price">$549.00 USD</div>
+      <p class="product-description">
+        Everything you need to go from zero to tournament-ready in one package. The Complete Bundle pairs the Oni Outdoor Pro net system with the Oniball, Anchor Kit, boundary lines, and the Onibag travel backpack — all at a significant saving over purchasing individually. One system. Every court.
+      </p>
+
+      <hr class="divider" />
+
+      <ul class="features-list">
+        <li><span class="check">✓</span> Oni Outdoor Pro net system — poles, net, auto-tensioner included</li>
+        <li><span class="check">✓</span> Oniball — premium regulation volleyball in the Oni colorway</li>
+        <li><span class="check">✓</span> Anchor Kit — step-on anchors, straps, carabiner hardware</li>
+        <li><span class="check">✓</span> Boundary lines — regulation court boundaries, UV-stable material</li>
+        <li><span class="check">✓</span> Onibag travel backpack — everything packs into one carry-on bag</li>
+      </ul>
+
+      <hr class="divider" />
+
+      <div class="bundle-includes">
+        <h3>What's Included</h3>
+        <ul class="bundle-items">
+          <li><span class="item-name">Oni Outdoor Pro Net System</span><span class="item-price">$500</span></li>
+          <li><span class="item-name">Oniball Volleyball</span><span class="item-price">$60</span></li>
+          <li><span class="item-name">Anchor Kit</span><span class="item-price">$30</span></li>
+          <li><span class="item-name">Onibag Travel Backpack</span><span class="item-price">$100</span></li>
+          <li><span class="item-name">Boundary Line Set</span><span class="item-price">Included</span></li>
+        </ul>
+      </div>
+
+      <div class="specs-section">
+        <h3>Specifications</h3>
+        <div class="specs-grid">
+          <div class="spec-row">
+            <div class="spec-label">Pole Material</div>
+            <div class="spec-value">Aerospace-grade carbon fiber composite</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Net Width</div>
+            <div class="spec-value">9 meters (regulation)</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Anchor System</div>
+            <div class="spec-value">Step-on integrated ground anchors</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Ball</div>
+            <div class="spec-value">Regulation indoor/outdoor, FIVB approved</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Backpack</div>
+            <div class="spec-value">Airline carry-on compatible</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Setup Time</div>
+            <div class="spec-value">Under 5 minutes solo</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Surface</div>
+            <div class="spec-value">Grass, turf, hardpack</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Bundle Savings</div>
+            <div class="spec-value">Over $140 vs. individual purchase</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="qty-section">
+        <div class="qty-label">Quantity</div>
+        <div class="qty-controls">
+          <button class="qty-btn" id="qty-minus" aria-label="Decrease quantity">−</button>
+          <input class="qty-input" type="number" id="qty-input" value="1" min="1" max="99" />
+          <button class="qty-btn" id="qty-plus" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+
+      <div class="cart-confirm" id="cart-confirm">✓ Added to cart!</div>
+
+      <button class="add-to-cart-btn" id="add-to-cart">Add to Cart</button>
+
+      <a href="../index.html#products" class="back-link">← Back to Shop</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo"><img src="../images/42bc64ac-6878-434b-995e-87e03e54ca72.png" alt="Oni Nets" /></div>
+        <p class="footer-tagline">Crafted for gravity-defying play.<br>Aerospace-grade. Tournament-ready.</p>
+        <a href="mailto:caleb@oninets.com" class="footer-email">caleb@oninets.com</a>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="outdoor-pro.html">Oni Outdoor Pro</a></li>
+          <li><a href="indoor-short-court.html">Oni Indoor Short Court</a></li>
+          <li><a href="anchor-kit.html">Anchor Kit</a></li>
+          <li><a href="onibag.html">Onibag Travel Backpack</a></li>
+          <li><a href="oniball.html">Oniball</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../index.html#about">Our Story</a></li>
+          <li><a href="../index.html#features">Technology</a></li>
+          <li><a href="mailto:caleb@oninets.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Oni Nets. All rights reserved.</span>
+      <span>Crafted for gravity-defying play.</span>
+    </div>
+  </footer>
+
+  <script src="../js/cart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Cart.updateBadge();
+
+      const qtyInput = document.getElementById('qty-input');
+      const qtyMinus = document.getElementById('qty-minus');
+      const qtyPlus = document.getElementById('qty-plus');
+      const addBtn = document.getElementById('add-to-cart');
+      const confirm = document.getElementById('cart-confirm');
+
+      qtyMinus.addEventListener('click', function () {
+        const val = parseInt(qtyInput.value, 10);
+        if (val > 1) qtyInput.value = val - 1;
+      });
+
+      qtyPlus.addEventListener('click', function () {
+        const val = parseInt(qtyInput.value, 10);
+        qtyInput.value = val + 1;
+      });
+
+      addBtn.addEventListener('click', function () {
+        const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+        Cart.add({
+          id: 'complete-bundle',
+          name: 'Complete Bundle',
+          price: 549,
+          image: '../images/gear-spread.png',
+          qty: qty
+        });
+        confirm.style.display = 'flex';
+        setTimeout(function () {
+          confirm.style.display = 'none';
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html>

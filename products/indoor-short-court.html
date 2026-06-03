@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oni Indoor Short Court — Oni Nets</title>
+  <link rel="stylesheet" href="../shared.css" />
+  <style>
+    body { padding-top: 100px; }
+
+    .product-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 48px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .product-image-wrap {
+      aspect-ratio: 1 / 1;
+      background: var(--off-white);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 120px;
+    }
+
+    .product-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .product-label {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      margin-bottom: 20px;
+    }
+
+    .product-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .product-price {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+
+    .product-description {
+      font-size: 17px;
+      line-height: 1.75;
+      color: #444;
+      margin-bottom: 32px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--light-gray);
+      margin: 32px 0;
+    }
+
+    .features-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .features-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .features-list li .check {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .specs-section h3 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--light-gray);
+    }
+
+    .spec-row { display: contents; }
+
+    .spec-label, .spec-value {
+      padding: 12px 16px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .spec-label {
+      font-weight: 600;
+      color: #555;
+      background: var(--off-white);
+    }
+
+    .spec-value { color: var(--black); }
+
+    .spec-row:last-child .spec-label,
+    .spec-row:last-child .spec-value { border-bottom: none; }
+
+    .qty-section { margin-bottom: 20px; }
+
+    .qty-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      border: 1px solid var(--light-gray);
+    }
+
+    .qty-btn {
+      width: 44px;
+      height: 44px;
+      background: var(--white);
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--black);
+      transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .qty-btn:hover { background: var(--off-white); }
+
+    .qty-input {
+      width: 60px;
+      height: 44px;
+      border: none;
+      border-left: 1px solid var(--light-gray);
+      border-right: 1px solid var(--light-gray);
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--black);
+      background: var(--white);
+      outline: none;
+    }
+
+    .add-to-cart-btn {
+      width: 100%;
+      padding: 18px 40px;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-bottom: 16px;
+    }
+
+    .add-to-cart-btn:hover { background: var(--gold); color: var(--black); }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--black); }
+
+    .cart-confirm {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: #f0f7f0;
+      border: 1px solid #c3e0c3;
+      color: #2d6a2d;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .product-page {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 40px 20px 80px;
+      }
+
+      .product-image-wrap { position: static; }
+
+      .specs-grid { grid-template-columns: 1fr; }
+      .spec-label { border-bottom: none; padding-bottom: 4px; }
+      .spec-value { padding-top: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="../index.html">
+      <img src="../images/42bc64ac-6878-434b-995e-87e03e54ca72.png" alt="Oni Nets" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../index.html#products">Products</a></li>
+      <li><a href="../index.html#features">Features</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="../cart.html" class="cart-icon">
+        🛒 <span>Cart</span>
+        <span id="cart-badge">0</span>
+      </a>
+      <a href="../index.html#products" class="nav-cta">Shop Now</a>
+    </div>
+  </nav>
+
+  <main class="product-page">
+    <div class="product-image-wrap">
+      <img src="../images/indoor.png" alt="Oni Indoor Short Court" />
+    </div>
+
+    <div class="product-detail">
+      <span class="product-label">Preorder Now Available</span>
+      <h1 class="product-title">Oni Indoor Short Court</h1>
+      <div class="product-price">$200.00 USD</div>
+      <p class="product-description">
+        The first portable net system engineered specifically for the Team USA indoor short court format. The Oni Indoor Short Court features a suction-cup stability system that anchors securely to any hardwood or sealed gym floor — no weights, no permanent hardware, zero damage. Built for competitive clubs, training facilities, and elite indoor athletes.
+      </p>
+
+      <hr class="divider" />
+
+      <ul class="features-list">
+        <li><span class="check">✓</span> Suction-cup stability system — anchors to any gym floor without damage</li>
+        <li><span class="check">✓</span> Freestanding design — no walls, pillars, or permanent fixtures needed</li>
+        <li><span class="check">✓</span> Team USA indoor short court format — official dimensions and net height</li>
+        <li><span class="check">✓</span> Gym floor safe — no scratches, no marks, no residue</li>
+        <li><span class="check">✓</span> One-person setup in under 10 minutes</li>
+      </ul>
+
+      <hr class="divider" />
+
+      <div class="specs-section">
+        <h3>Specifications</h3>
+        <div class="specs-grid">
+          <div class="spec-row">
+            <div class="spec-label">Format</div>
+            <div class="spec-value">Team USA Indoor Short Court</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Anchor System</div>
+            <div class="spec-value">Industrial suction-cup base system</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Net Height</div>
+            <div class="spec-value">Adjustable — regulation indoor heights</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Floor Compatibility</div>
+            <div class="spec-value">Hardwood, sealed concrete, sport tile</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Floor Safety</div>
+            <div class="spec-value">No scratches, no adhesive residue</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Setup Time</div>
+            <div class="spec-value">Under 10 minutes solo</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">System Weight</div>
+            <div class="spec-value">Under 12 lbs complete</div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-label">Availability</div>
+            <div class="spec-value">Preorder — ships Q3 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="qty-section">
+        <div class="qty-label">Quantity</div>
+        <div class="qty-controls">
+          <button class="qty-btn" id="qty-minus" aria-label="Decrease quantity">−</button>
+          <input class="qty-input" type="number" id="qty-input" value="1" min="1" max="99" />
+          <button class="qty-btn" id="qty-plus" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+
+      <div class="cart-confirm" id="cart-confirm">✓ Added to cart!</div>
+
+      <button class="add-to-cart-btn" id="add-to-cart">Preorder Now</button>
+
+      <a href="../index.html#products" class="back-link">← Back to Shop</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo"><img src="../images/42bc64ac-6878-434b-995e-87e03e54ca72.png" alt="Oni Nets" /></div>
+        <p class="footer-tagline">Crafted for gravity-defying play.<br>Aerospace-grade. Tournament-ready.</p>
+        <a href="mailto:caleb@oninets.com" class="footer-email">caleb@oninets.com</a>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="outdoor-pro.html">Oni Outdoor Pro</a></li>
+          <li><a href="indoor-short-court.html">Oni Indoor Short Court</a></li>
+          <li><a href="anchor-kit.html">Anchor Kit</a></li>
+          <li><a href="onibag.html">Onibag Travel Backpack</a></li>
+          <li><a href="oniball.html">Oniball</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../index.html#about">Our Story</a></li>
+          <li><a href="../index.html#features">Technology</a></li>
+          <li><a href="mailto:caleb@oninets.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Oni Nets. All rights reserved.</span>
+      <span>Crafted for gravity-defying play.</span>
+    </div>
+  </footer>
+
+  <script src="../js/cart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Cart.updateBadge();
+
+      const qtyInput = document.getElementById('qty-input');
+      const qtyMinus = document.getElementById('qty-minus');
+      const qtyPlus = document.getElementById('qty-plus');
+      const addBtn = document.getElementById('add-to-cart');
+      const confirm = document.getElementById('cart-confirm');
+
+      qtyMinus.addEventListener('click', function () {
+        const val = parseInt(qtyInput.value, 10);
+        if (val > 1) qtyInput.value = val - 1;
+      });
+
+      qtyPlus.addEventListener('click', function () {
+        const val = parseInt(qtyInput.value, 10);
+        qtyInput.value = val + 1;
+      });
+
+      addBtn.addEventListener('click', function () {
+        const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+        Cart.add({
+          id: 'indoor-short-court',
+          name: 'Oni Indoor Short Court',
+          price: 200,
+          image: '../images/indoor.png',
+          qty: qty
+        });
+        confirm.style.display = 'flex';
+        setTimeout(function () {
+          confirm.style.display = 'none';
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html>
