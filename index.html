@@ -29,6 +29,63 @@
       overflow-x: hidden;
     }
 
+    /* ── LOADER ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #111;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease;
+    }
+
+    #loader.fade-out { opacity: 0; pointer-events: none; }
+
+    #loader-logo {
+      width: 180px;
+      opacity: 0;
+      transform: scale(0.88);
+      animation: logoReveal 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s forwards;
+    }
+
+    #loader-tagline {
+      margin-top: 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.7);
+      opacity: 0;
+      animation: taglineReveal 0.7s ease 0.9s forwards;
+    }
+
+    #loader-bar {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      animation: barSweep 1.6s ease 0.3s forwards;
+      width: 0;
+    }
+
+    @keyframes logoReveal {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes taglineReveal {
+      to { opacity: 1; }
+    }
+
+    @keyframes barSweep {
+      0%   { width: 0; left: 0; }
+      50%  { width: 60%; left: 0; }
+      100% { width: 0; left: 100%; }
+    }
+
     /* ── TYPOGRAPHY ── */
     .display {
       font-family: 'Archivo Black', sans-serif;
@@ -45,30 +102,34 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 48px;
-      height: 120px;
+      height: 80px;
       background: rgba(255,255,255,0.96);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(0,0,0,0.06);
     }
 
     .nav-logo img {
-      height: 110px;
+      height: 100px;
       width: auto;
     }
 
     .nav-links {
       display: flex;
-      gap: 40px;
+      gap: 32px;
       list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .nav-links a {
       font-family: 'Inter', sans-serif;
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 500;
       text-decoration: none;
       color: var(--black);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
       transition: color 0.2s;
     }
 
@@ -84,14 +145,15 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 10px 24px;
+      padding: 8px 20px;
       background: var(--black);
       color: var(--white);
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 12px;
+      font-weight: 700;
       text-decoration: none;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       transition: background 0.2s, color 0.2s;
     }
 
@@ -729,9 +791,300 @@
       .products-grid { grid-template-columns: repeat(2, 1fr); }
       .endorsements-grid { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* ── NOT FOR EVERYONE ── */
+    .nfe-section {
+      background: var(--black);
+      padding: 160px 48px;
+      text-align: center;
+    }
+
+    .nfe-headline {
+      font-size: clamp(64px, 10vw, 140px);
+      color: var(--gold);
+      line-height: 1.0;
+      margin-bottom: 64px;
+      letter-spacing: -0.01em;
+    }
+
+    .nfe-body {
+      max-width: 680px;
+      margin: 0 auto 80px;
+    }
+
+    .nfe-body p {
+      font-size: clamp(17px, 2vw, 22px);
+      color: rgba(255,255,255,0.7);
+      line-height: 1.9;
+      font-weight: 400;
+    }
+
+    .nfe-close {
+      font-size: clamp(40px, 6vw, 88px);
+      color: var(--white);
+      line-height: 1.0;
+    }
+
+    /* ── TRUST BADGES ── */
+    .trust-badges {
+      display: flex;
+      gap: 24px;
+      margin-top: 44px;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border: 1px solid rgba(201,168,76,0.3);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .trust-badge span.badge-icon {
+      font-size: 14px;
+    }
+
+    /* ── LAUNCH CALLOUT ── */
+    .launch-callout {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: 1px solid rgba(201,168,76,0.5);
+      background: rgba(201,168,76,0.1);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--gold-light);
+    }
+
+    /* ── ATHLETE SECTION ── */
+    .athlete-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 640px;
+    }
+
+    .athlete-img-side {
+      overflow: hidden;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .athlete-img-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .athlete-text-side {
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 72px;
+    }
+
+    .athlete-text-side .section-label { color: var(--gold); margin-bottom: 20px; }
+
+    .athlete-headline {
+      font-size: clamp(40px, 5vw, 72px);
+      color: var(--white);
+      line-height: 1.0;
+      margin-bottom: 28px;
+    }
+
+    .athlete-body {
+      font-size: 17px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.75;
+      max-width: 420px;
+      margin-bottom: 40px;
+    }
+
+    /* ── OUTDOOR PHOTO SECTION ── */
+    .outdoor-section {
+      position: relative;
+      height: 70vh;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .outdoor-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/ChatGPT Image May 28, 2026, 05_52_38 PM.png');
+      background-size: cover;
+      background-position: center 40%;
+      filter: brightness(0.5);
+    }
+
+    .outdoor-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .outdoor-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .outdoor-title {
+      font-size: clamp(40px, 6vw, 88px);
+      color: var(--white);
+      line-height: 1.05;
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 40px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+
+    .btn-gold:hover { background: var(--gold-light); }
+
+    /* ── WHY WE EXIST ── */
+    .why-section {
+      background: var(--off-white);
+      padding: 120px 48px;
+      text-align: center;
+    }
+
+    .why-inner { max-width: 800px; margin: 0 auto; }
+
+    .why-title {
+      font-size: clamp(48px, 7vw, 96px);
+      line-height: 1.05;
+      margin-bottom: 36px;
+      color: var(--black);
+    }
+
+    .why-body {
+      font-size: 19px;
+      line-height: 1.75;
+      color: #444;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ── WAITLIST SECTION ── */
+    .waitlist-section {
+      background: var(--black);
+      padding: 120px 48px;
+      text-align: center;
+    }
+
+    .waitlist-section .section-label { color: var(--gold); margin-bottom: 20px; }
+
+    .waitlist-title {
+      font-size: clamp(40px, 6vw, 80px);
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .waitlist-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+
+    .waitlist-form {
+      display: flex;
+      justify-content: center;
+      max-width: 520px;
+      margin: 0 auto 16px;
+    }
+
+    .waitlist-form input {
+      flex: 1;
+      padding: 16px 24px;
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      outline: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-right: none;
+    }
+
+    .waitlist-form input::placeholder { color: rgba(255,255,255,0.35); }
+
+    .waitlist-form button {
+      padding: 16px 32px;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .waitlist-form button:hover { background: var(--gold-light); }
+
+    .waitlist-note {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      margin-top: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .nfe-section { padding: 100px 24px; }
+      .trust-badges { gap: 12px; }
+      .athlete-section { grid-template-columns: 1fr; }
+      .athlete-img-side { height: 360px; }
+      .athlete-text-side { padding: 56px 24px; }
+      .why-section { padding: 72px 24px; }
+      .outdoor-section { height: 50vh; min-height: 320px; }
+      .outdoor-title { font-size: clamp(32px, 8vw, 64px); }
+      .waitlist-section { padding: 72px 24px; }
+      .waitlist-form { flex-direction: column; }
+      .waitlist-form input { border-right: 1px solid rgba(255,255,255,0.15); border-bottom: none; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <img id="loader-logo" src="images/IMG_7720.PNG" alt="Oni Nets" />
+    <p id="loader-tagline">Built For Competitors</p>
+    <div id="loader-bar"></div>
+  </div>
 
   <!-- NAV -->
   <nav>
@@ -751,7 +1104,7 @@
         Cart
         <span id="cart-badge" style="position:absolute;top:-8px;right:-10px;background:var(--gold);color:#fff;border-radius:50%;width:18px;height:18px;font-size:11px;font-weight:700;display:none;align-items:center;justify-content:center;">0</span>
       </a>
-      <a href="#products" class="nav-cta">Shop Now</a>
+      <a href="#waitlist" class="nav-cta">Join Early Access</a>
     </div>
   </nav>
 
@@ -759,23 +1112,49 @@
   <section class="hero" id="home">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Outdoor. Indoor. Always Elite.</p>
-      <h1 class="hero-title display">The Future of<br>Volleyball<br>Has Arrived.</h1>
-      <p class="hero-sub">Premium carbon fiber volleyball systems — engineered for grass courts, indoor short-court play, and elite competition worldwide.</p>
-      <div class="hero-ctas">
+      <p class="hero-eyebrow">For Players Who Take The Game Seriously</p>
+      <h1 class="hero-title display">EARN YOUR<br>CROWN.</h1>
+      <p class="hero-sub">Premium volleyball systems engineered for athletes who refuse to settle.</p>
+      <div class="hero-ctas" style="justify-content:center;">
         <a href="#products" class="hero-cta">Shop Now</a>
-        <a href="#features" class="hero-cta-ghost">See How It Works</a>
       </div>
+      <div class="launch-callout">First production run launching soon — join early access for launch pricing and updates.</div>
     </div>
   </section>
 
-  <!-- TAGLINE -->
-  <section class="tagline-section" id="about">
-    <h2 class="tagline-title display">Engineered<br>for Elite<br>Play.</h2>
-    <div class="tagline-body">
-      <p>Oni Nets was built by athletes who refused to settle for cheap, unstable equipment. We engineered systems using aerospace-grade carbon fiber poles and a proprietary auto-tension mechanism — because the game deserves gear that keeps up.</p>
-      <p>Whether you're competing on outdoor courts or training on the new Team USA indoor short court format, the Oni Carbon System sets up in minutes, holds tournament-ready tension, and fits in a backpack.</p>
-      <a href="#features" class="tagline-link">See All Features →</a>
+  <!-- ATHLETE BRAND SECTION -->
+  <section class="athlete-section">
+    <div class="athlete-img-side">
+      <img src="images/jereseyphoto.jpeg" alt="Keoni T. — National Champion, AVP Player" />
+    </div>
+    <div class="athlete-text-side">
+      <p class="section-label">For Players Who Take The Game Seriously</p>
+      <h2 class="athlete-headline display">BUILT BY<br>PLAYERS.<br>FOR PLAYERS.</h2>
+      <p class="athlete-body">Oni wasn't built in a boardroom.<br>It was built by players who were tired of settling for equipment that couldn't keep up.<br>If you train seriously, compete often, and expect more from your gear — <strong style="color:var(--white);">you're one of us.</strong></p>
+      <div class="trust-badges">
+        <div class="trust-badge"><span class="badge-icon">🏐</span> Built in Utah</div>
+        <div class="trust-badge"><span class="badge-icon">⚡</span> Summer 2026 Launch</div>
+        <div class="trust-badge"><span class="badge-icon">👑</span> First Production Run</div>
+      </div>
+      <a href="#waitlist" class="btn-gold" style="margin-top:40px;">Join Early Access</a>
+    </div>
+  </section>
+
+  <!-- WHY WE EXIST -->
+  <section class="why-section">
+    <div class="why-inner">
+      <p class="section-label" style="color:var(--gold);margin-bottom:20px;">Why We Exist</p>
+      <h2 class="why-title display">Volleyball<br>Deserves Better.</h2>
+      <p class="why-body">Players spend thousands on training, travel, tournaments, and coaching. Yet the equipment often feels like an afterthought. We built Oni because serious athletes deserve equipment that performs at the same level they do.</p>
+    </div>
+  </section>
+
+  <!-- OUTDOOR PHOTO SECTION -->
+  <section class="outdoor-section">
+    <div class="outdoor-bg"></div>
+    <div class="outdoor-content">
+      <p class="outdoor-eyebrow">The System In The Wild</p>
+      <h2 class="outdoor-title display">ANY COURT.<br>ANY TERRAIN.</h2>
     </div>
   </section>
 
@@ -848,11 +1227,21 @@
         </div>
         <div class="product-info">
           <div class="product-name">Oni Indoor Short Court <span class="product-badge">New</span></div>
-          <p class="product-desc">The Team USA-approved indoor short court system. Built for control-focused training, clubs, and competitive indoor play.</p>
+          <p class="product-desc">The first purpose-built portable indoor short court system. Built for control-focused training, clubs, and competitive indoor play.</p>
           <div class="product-price">$200.00 USD</div>
         </div>
       </a>
 
+    </div>
+  </section>
+
+  <!-- TAGLINE -->
+  <section class="tagline-section" id="about">
+    <h2 class="tagline-title display">Engineered<br>for Elite<br>Play.</h2>
+    <div class="tagline-body">
+      <p>Oni Nets was built by athletes who refused to settle for cheap, unstable equipment. We engineered systems using aerospace-grade carbon fiber poles and a proprietary auto-tension mechanism — because the game deserves gear that keeps up.</p>
+      <p>Whether you're competing on outdoor courts or running an indoor short court format, the Oni Carbon System sets up in minutes, holds tournament-ready tension, and fits in a backpack.</p>
+      <a href="#features" class="tagline-link">See All Features →</a>
     </div>
   </section>
 
@@ -864,7 +1253,7 @@
       <h2 class="featured-title display">The Oni Carbon System</h2>
       <p class="featured-desc">The pinnacle of outdoor volleyball. Engineered with aerospace-grade carbon fiber poles and a proprietary stake-free tensioning system. One person. Five minutes. Tournament-ready on any terrain — and the same technology now powers our indoor short court system.</p>
       <div class="featured-price">Starting at $549.00 USD</div>
-      <a href="#products" class="btn-primary">Shop Now</a>
+      <a href="#waitlist" class="btn-primary">Join Early Access</a>
     </div>
   </section>
 
@@ -933,9 +1322,9 @@
   <!-- ENDORSEMENTS -->
   <section class="endorsements-section">
     <div class="section-header">
-      <p class="section-label">Real People. Real Results.</p>
-      <h2 class="section-title display">They Switched.<br>They Never Looked Back.</h2>
-      <p style="font-size:17px; color:#666; max-width:560px; margin:20px auto 0; line-height:1.7;">Champions, coaches, and everyday athletes trust Oni Nets. Here's what they actually said.</p>
+      <p class="section-label">Athletes. Competitors. Champions.</p>
+      <h2 class="section-title display">The Community<br>Is Already Here.</h2>
+      <p style="font-size:17px; color:#666; max-width:560px; margin:20px auto 0; line-height:1.7;">Tournament players, coaches, and elite athletes are already training with Oni. This is what they're saying.</p>
     </div>
     <div class="endorsements-grid">
 
@@ -979,7 +1368,15 @@
 
   <!-- CTA BANNER -->
   <section class="cta-section" id="contact">
-    <h2 class="cta-title display">Ready<br>to Play?</h2>
+    <h2 class="cta-title display">Championship<br>Mindset.</h2>
+    <a href="#waitlist" class="btn-cta">Join Early Access</a>
+  </section>
+
+  <!-- WAITLIST -->
+  <section class="waitlist-section" id="waitlist">
+    <p class="section-label">Early Access</p>
+    <h2 class="waitlist-title display">Become Part Of<br>The First Wave.</h2>
+    <p class="waitlist-sub">The system is ready. Are you?</p>
     <a href="#products" class="btn-cta">Shop Now</a>
   </section>
 
@@ -1028,7 +1425,35 @@
     </div>
   </footer>
 
+  <!-- LOADER FADE OUT -->
+  <script>
+    (function() {
+      var loader = document.getElementById('loader');
+      function hideLoader() {
+        loader.classList.add('fade-out');
+        setTimeout(function() { loader.style.display = 'none'; }, 700);
+      }
+      if (document.readyState === 'complete') {
+        setTimeout(hideLoader, 1800);
+      } else {
+        window.addEventListener('load', function() { setTimeout(hideLoader, 1800); });
+      }
+    })();
+  </script>
+
   <script src="js/cart.js"></script>
   <script>document.addEventListener('DOMContentLoaded', () => Cart.updateBadge());</script>
+  <script>
+    function handleWaitlist(e) {
+      e.preventDefault();
+      const email = document.getElementById('waitlist-email').value;
+      const msg = document.getElementById('waitlist-msg');
+      if (email) {
+        msg.textContent = "You're in. We'll be in touch.";
+        msg.style.color = 'var(--gold-light)';
+        document.getElementById('waitlist-email').value = '';
+      }
+    }
+  </script>
 </body>
 </html>
