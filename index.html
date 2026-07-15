@@ -573,81 +573,82 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     /* ── ENDORSEMENTS ── */
     .endorsements-section {
-      background: var(--off-white);
-      padding: 100px 48px;
+      background: var(--black);
+      padding: 80px 48px;
     }
+
+    .endorsements-section .section-label { color: var(--gold); }
+    .endorsements-section .section-title { color: var(--white); }
 
     .endorsements-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 1200px;
-      margin: 0 auto;
+      gap: 1px;
+      max-width: 1100px;
+      margin: 48px auto 0;
+      background: #2a2a2a;
+      border: 1px solid #2a2a2a;
     }
 
     .endorsement-card {
-      background: var(--white);
-      padding: 40px 36px;
-      border: 1px solid var(--light-gray);
-      position: relative;
-    }
-
-    .endorsement-card::before {
-      content: '\201C';
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 80px;
-      line-height: 1;
-      color: var(--gold);
-      opacity: 0.25;
-      position: absolute;
-      top: 16px;
-      left: 28px;
-    }
-
-    .endorsement-stars {
+      background: var(--black);
+      padding: 40px 32px;
       display: flex;
-      gap: 4px;
-      margin-bottom: 16px;
-    }
-
-    .endorsement-stars span {
-      color: var(--gold);
-      font-size: 16px;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
     }
 
     .endorsement-quote {
-      font-size: 17px;
+      font-size: 16px;
       font-style: italic;
-      line-height: 1.7;
-      color: #333;
-      margin-bottom: 28px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.78);
+      flex: 1;
     }
 
     .endorsement-meta {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
+      padding-top: 20px;
+      border-top: 1px solid #2a2a2a;
     }
 
     .endorsement-avatar {
-      width: 56px;
-      height: 56px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       object-fit: cover;
       object-position: top center;
-      background: var(--light-gray);
       flex-shrink: 0;
-      border: 2px solid var(--gold);
+    }
+
+    .endorsement-avatar-initial {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #1e1e1e;
+      border: 1px solid #333;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 14px;
+      color: var(--gold);
+      letter-spacing: 0.02em;
     }
 
     .endorsement-name {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
+      color: var(--white);
     }
 
     .endorsement-title {
-      font-size: 13px;
-      color: var(--gray);
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
       margin-top: 2px;
     }
 
@@ -791,8 +792,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .features-section,
       .cta-section { padding: 72px 24px; }
 
-      .products-grid,
-      .endorsements-grid { grid-template-columns: 1fr; gap: 16px; }
+      .products-grid { grid-template-columns: 1fr; gap: 16px; }
+      .endorsements-grid { grid-template-columns: 1fr; gap: 1px; }
 
       .feature-item { grid-template-columns: 1fr; gap: 16px; }
       .feature-icon { width: 48px; height: 48px; }
@@ -805,7 +806,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     @media (min-width: 769px) and (max-width: 1024px) {
       .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .endorsements-grid { grid-template-columns: repeat(2, 1fr); }
+      .endorsements-grid { grid-template-columns: repeat(2, 1fr); gap: 1px; }
     }
 
     /* ── NOT FOR EVERYONE ── */
@@ -1120,7 +1121,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         Cart
         <span id="cart-badge" style="position:absolute;top:-8px;right:-10px;background:var(--gold);color:#fff;border-radius:50%;width:18px;height:18px;font-size:11px;font-weight:700;display:none;align-items:center;justify-content:center;">0</span>
       </a>
-      <a href="#waitlist" class="nav-cta">Join Early Access</a>
+      <a href="california#early-access" class="nav-cta">Join Early Access</a>
     </div>
   </nav>
 
@@ -1176,110 +1177,53 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <!-- TAGLINE -->
   <section class="tagline-section" id="about">
-    <h2 class="tagline-title display">Engineered<br>for Elite<br>Play.</h2>
+    <h2 class="tagline-title display">Designed<br>for Serious<br>Play.</h2>
     <div class="tagline-body">
-      <p>Oni Nets was built by athletes who refused to settle for cheap, unstable equipment. We engineered systems using aerospace-grade carbon fiber poles and a proprietary auto-tension mechanism — because the game deserves gear that keeps up.</p>
-      <p>Whether you're competing on outdoor courts or running an indoor short court format, the Oni Carbon System sets up in minutes, holds tournament-ready tension, and fits in a backpack.</p>
-      <a href="#features" class="tagline-link">See All Features →</a>
+      <p>Oni was built by athletes who looked at the equipment around the sport and believed serious players deserved better. We are developing systems that reflect how the volleyball community actually trains and competes.</p>
+      <p>Whether you play outdoors on grass or train indoors, the Oni System is designed around the idea that one platform should be able to do both — through interchangeable base configurations.</p>
+      <a href="#features" class="tagline-link">See What We're Building →</a>
     </div>
   </section>
 
   <!-- PRODUCTS -->
   <section class="products-section" id="products">
     <div class="section-header">
-      <p class="section-label">Shop</p>
-      <h2 class="section-title display">Our Products</h2>
+      <p class="section-label">The Oni Lineup</p>
+      <h2 class="section-title display">Two Systems.</h2>
     </div>
-    <div class="products-grid">
+    <div class="products-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 900px; margin: 0 auto;">
 
-      <a class="product-card" href="products/outdoor-pro.html">
+      <a class="product-card" href="products/oni-system">
         <div class="product-img-wrap">
-          <img src="images/net-white.png" alt="Oni Outdoor Pro Net System" />
+          <img src="images/net-white.png" alt="The Oni System — Full-Size Competition System" />
         </div>
         <div class="product-info">
-          <div class="product-name">Oni Outdoor Pro <span class="product-badge">Flagship</span></div>
-          <p class="product-desc">Our full carbon fiber outdoor net system — poles, net, tensioner, and step-on anchors. Tournament-ready out of the box.</p>
-          <div class="product-price">$500.00 USD</div>
+          <div class="product-name">The Oni System <span class="product-badge">Full-Size</span></div>
+          <p class="product-desc">A full-size system designed around interchangeable base components for grass and indoor court use. One modular platform.</p>
         </div>
       </a>
 
-      <a class="product-card" href="products/anchor-kit.html">
+      <a class="product-card" href="products/training-system">
         <div class="product-img-wrap">
-          <img src="images/anchor-kit.png" alt="Oni Anchor Kit" />
+          <img src="images/indoor.png" alt="Oni Short Court — Compact Skill-Development System" />
         </div>
         <div class="product-info">
-          <div class="product-name">Anchor Kit</div>
-          <p class="product-desc">Step-on ground anchors with integrated straps and carabiner hardware. No tools needed.</p>
-          <div class="product-price">$30.00 USD</div>
+          <div class="product-name">Oni Short Court <span class="product-badge">Training</span></div>
+          <p class="product-desc">A compact system for clubs, coaches, and athletes focused on ball control, technique, and skill development.</p>
         </div>
       </a>
 
-      <a class="product-card" href="products/complete-bundle.html">
-        <div class="product-img-wrap">
-          <img src="images/gear-spread.png" alt="Full Oni Gear Set" />
-        </div>
-        <div class="product-info">
-          <div class="product-name">Complete Bundle</div>
-          <p class="product-desc">Everything in one — net system, ball, anchor kit, boundary lines, and the travel backpack.</p>
-          <div class="product-price">Starting at $549.00 USD</div>
-        </div>
-      </a>
-
-      <a class="product-card" href="products/onibag.html">
-        <div class="product-img-wrap">
-          <img src="images/backpack.png" alt="Onibag Travel Backpack" />
-        </div>
-        <div class="product-info">
-          <div class="product-name">Onibag Travel Backpack</div>
-          <p class="product-desc">Modular carry system designed for the solo athlete. Fits the full net setup plus gear.</p>
-          <div class="product-price">$100.00 USD</div>
-        </div>
-      </a>
-
-      <a class="product-card" href="products/oniball.html">
-        <div class="product-img-wrap">
-          <img src="images/ball.png" alt="Oniball Volleyball" />
-        </div>
-        <div class="product-info">
-          <div class="product-name">Oniball</div>
-          <p class="product-desc">Premium volleyball with the Oni Nets signature colorway. Regulation size and weight.</p>
-          <div class="product-price">$60.00 USD</div>
-        </div>
-      </a>
-
-      <a class="product-card" href="products/indoor-short-court.html">
-        <div class="product-img-wrap">
-          <img src="images/indoor.png" alt="Oni Indoor Short Court System" />
-        </div>
-        <div class="product-info">
-          <div class="product-name">Oni Indoor Short Court <span class="product-badge">New</span></div>
-          <p class="product-desc">The first purpose-built portable indoor short court system. Built for control-focused training, clubs, and competitive indoor play.</p>
-          <div class="product-price">$200.00 USD</div>
-        </div>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- TAGLINE -->
-  <section class="tagline-section" id="about">
-    <h2 class="tagline-title display">Engineered<br>for Elite<br>Play.</h2>
-    <div class="tagline-body">
-      <p>Oni Nets was built by athletes who refused to settle for cheap, unstable equipment. We engineered systems using aerospace-grade carbon fiber poles and a proprietary auto-tension mechanism — because the game deserves gear that keeps up.</p>
-      <p>Whether you're competing on outdoor courts or running an indoor short court format, the Oni Carbon System sets up in minutes, holds tournament-ready tension, and fits in a backpack.</p>
-      <a href="#features" class="tagline-link">See All Features →</a>
     </div>
   </section>
 
   <!-- FEATURED PRODUCT -->
   <section class="featured-section">
-    <img class="featured-img" src="images/net-white.png" alt="Oni Carbon System" />
+    <img class="featured-img" src="images/net-white.png" alt="The Oni System" />
     <div>
-      <p class="featured-label">Flagship Product</p>
-      <h2 class="featured-title display">The Oni Carbon System</h2>
-      <p class="featured-desc">The pinnacle of outdoor volleyball. Engineered with aerospace-grade carbon fiber poles and a proprietary stake-free tensioning system. One person. Five minutes. Tournament-ready on any terrain — and the same technology now powers our indoor short court system.</p>
-      <div class="featured-price">Starting at $549.00 USD</div>
-      <a href="#waitlist" class="btn-primary">Join Early Access</a>
+      <p class="featured-label">Flagship System</p>
+      <h2 class="featured-title display">The Oni System</h2>
+      <p class="featured-desc">One platform designed to move between grass and indoor environments through interchangeable base configurations. Built for players who take the sport seriously and want equipment that keeps up.</p>
+      <a href="products/oni-system" class="btn-primary">Explore the Oni System</a>
     </div>
   </section>
 
@@ -1288,16 +1232,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div class="features-grid">
       <div class="section-header">
         <p class="section-label">Why Oni</p>
-        <h2 class="section-title display">Why Athletes<br>Choose Oni.</h2>
+        <h2 class="section-title display">Why Players<br>Choose Oni.</h2>
       </div>
 
       <div class="feature-item">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/><circle cx="12" cy="19" r="2"/></svg>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
         </div>
         <div class="feature-text">
-          <div class="feature-name">Suction-Cup Stability System</div>
-          <div class="feature-desc">Our innovative suction-cup anchoring system keeps the net secure and stable without weights, floor anchors, or permanent installation. Designed for indoor short-court volleyball — tournament-ready performance that protects gym floors and sets up in minutes.</div>
+          <div class="feature-name">Modular Platform</div>
+          <div class="feature-desc">The Oni System is designed around interchangeable base components, so the same core system can be configured for both grass and indoor court environments.</div>
         </div>
       </div>
 
@@ -1306,42 +1250,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <svg viewBox="0 0 24 24"><path d="M12 22s-8-5-8-11a8 8 0 0116 0c0 6-8 11-8 11z"/><circle cx="12" cy="11" r="3"/></svg>
         </div>
         <div class="feature-text">
-          <div class="feature-name">Step-On Anchor Base</div>
-          <div class="feature-desc">Eliminate external tools. Our integrated anchor system uses a high-leverage step-on design for rapid, secure installation on any outdoor grass surface.</div>
+          <div class="feature-name">Built for Grass and Indoor</div>
+          <div class="feature-desc">One platform. Two environments. Players who compete outdoors and train indoors no longer need completely separate systems.</div>
         </div>
       </div>
 
       <div class="feature-item">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
         </div>
         <div class="feature-text">
-          <div class="feature-name">Carbon Fiber Poles</div>
-          <div class="feature-desc">Constructed from aerospace-grade carbon fiber composite — peak structural integrity and wind resistance while remaining ultra-light for transport.</div>
+          <div class="feature-name">Designed With Players</div>
+          <div class="feature-desc">Developed with input from athletes, coaches, and clubs who play the game at a serious level. Real environments, real feedback.</div>
         </div>
       </div>
 
       <div class="feature-item">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 100-5C13 2 12 7 12 7z"/></svg>
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
         </div>
         <div class="feature-text">
-          <div class="feature-name">Backpack Portability</div>
-          <div class="feature-desc">The total net system collapses into the Onibag travel backpack. Designed for the solo athlete — effortless mobility from city streets to any court.</div>
+          <div class="feature-name">Training System for Clubs</div>
+          <div class="feature-desc">Oni Short Court is approximately one-third the size of a full court, built specifically for clubs, coaches, and skill-development environments.</div>
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <!-- GEAR SPREAD -->
-  <section class="gear-section">
-    <img class="gear-img" src="images/gear-spread.png" alt="Full Oni Nets Gear Spread" />
-    <div class="gear-text">
-      <p class="section-label">The Full System</p>
-      <h2 class="gear-title display">Everything You Need.</h2>
-      <p class="gear-desc">One system. Every court. Whether you're setting up outdoors on any terrain or running an indoor short court session, the Oni Carbon System includes the net, poles, auto-tension hardware, and anchors — packing down into the Onibag travel backpack.</p>
-      <a href="#products" class="btn-primary">Shop the Bundle</a>
     </div>
   </section>
 
@@ -1350,41 +1283,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div class="section-header">
       <p class="section-label">Athletes. Competitors. Champions.</p>
       <h2 class="section-title display">The Community<br>Is Already Here.</h2>
-      <p style="font-size:17px; color:#666; max-width:560px; margin:20px auto 0; line-height:1.7;">Tournament players, coaches, and elite athletes are already training with Oni. This is what they're saying.</p>
+      <p style="font-size:17px; color:#666; max-width:560px; margin:20px auto 0; line-height:1.7;">Players, coaches, and athletes who've trained with Oni on what the systems feel like in real use.</p>
     </div>
     <div class="endorsements-grid">
 
       <div class="endorsement-card">
-        <div class="endorsement-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="endorsement-quote">"Engineering meets athleticism. The stability of the base is unmatched for a system that doesn't require a hammer. Set up was easy and stress free."</p>
+        <p class="endorsement-quote">"Built by players who know what's missing. College athletes have the same frustrations as pros — Oni gets that."</p>
         <div class="endorsement-meta">
-          <img class="endorsement-avatar" src="images/bruce.png" alt="Bruce W." />
+          <div class="endorsement-avatar-initial">AW</div>
           <div>
-            <div class="endorsement-name">Bruce W.</div>
-            <div class="endorsement-title">Billionaire · Grass Specialist</div>
+            <div class="endorsement-name">Andy Weist</div>
+            <div class="endorsement-title">UVU Men's Volleyball</div>
           </div>
         </div>
       </div>
 
       <div class="endorsement-card">
-        <div class="endorsement-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="endorsement-quote">"Finally, a portable net that feels like a permanent fixture. Carbon fiber poles provide incredible tension and zero sag. The travel bag helps so much as I travel with the Oni Net."</p>
-        <div class="endorsement-meta">
-          <div>
-            <div class="endorsement-name">Elena R.</div>
-            <div class="endorsement-title">National Tournament Director</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="endorsement-card">
-        <div class="endorsement-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="endorsement-quote">"As an AVP player I've used a lot of nets. The Oni Carbon System is on another level — you can feel the quality from the first set up. This is the net the sport deserves."</p>
+        <p class="endorsement-quote">"One system for grass and indoor. That's the concept every serious player wants and nobody's delivered — until now."</p>
         <div class="endorsement-meta">
           <img class="endorsement-avatar" src="images/keoni.png" alt="Keoni T." />
           <div>
             <div class="endorsement-name">Keoni T.</div>
             <div class="endorsement-title">National Champion · AVP Player</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="endorsement-card">
+        <p class="endorsement-quote">"We built what we wished existed. Every decision came from time on the court — not from a product catalog."</p>
+        <div class="endorsement-meta">
+          <div class="endorsement-avatar-initial">JC</div>
+          <div>
+            <div class="endorsement-name">Jameson Cooper</div>
+            <div class="endorsement-title">Co-Founder, Oni Nets</div>
           </div>
         </div>
       </div>
@@ -1395,15 +1326,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <!-- CTA BANNER -->
   <section class="cta-section" id="contact">
     <h2 class="cta-title display">Championship<br>Mindset.</h2>
-    <a href="#waitlist" class="btn-cta">Join Early Access</a>
-  </section>
-
-  <!-- WAITLIST -->
-  <section class="waitlist-section" id="waitlist">
-    <p class="section-label">Early Access</p>
-    <h2 class="waitlist-title display">Become Part Of<br>The First Wave.</h2>
-    <p class="waitlist-sub">The system is ready. Are you?</p>
-    <a href="#products" class="btn-cta">Shop Now</a>
+    <a href="california#early-access" class="btn-cta">Join Early Access</a>
   </section>
 
   <!-- FOOTER -->
@@ -1413,33 +1336,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="footer-logo">
           <img src="images/main-logo.png" alt="Oni Nets" />
         </div>
-        <p class="footer-tagline">Crafted for gravity-defying play.<br>Aerospace-grade. Tournament-ready.</p>
+        <p class="footer-tagline">Designed for serious volleyball players.<br>First production run coming soon.</p>
         <a href="mailto:caleb@oninets.com" class="footer-email">caleb@oninets.com</a>
-        <div class="footer-socials">
-          <a href="#" title="Instagram">&#9679;</a>
-          <a href="#" title="TikTok">&#9632;</a>
-          <a href="#" title="YouTube">&#9654;</a>
-          <a href="#" title="X / Twitter">&#10005;</a>
-        </div>
       </div>
 
       <div class="footer-col">
-        <h4>Shop</h4>
+        <h4>Systems</h4>
         <ul>
-          <li><a href="products/outdoor-pro.html">Oni Outdoor Pro</a></li>
-          <li><a href="products/indoor-short-court.html">Oni Indoor Short Court</a></li>
-          <li><a href="products/anchor-kit.html">Anchor Kit</a></li>
-          <li><a href="products/onibag.html">Onibag Travel Backpack</a></li>
-          <li><a href="products/oniball.html">Oniball</a></li>
-          <li><a href="products/complete-bundle.html">Complete Bundle</a></li>
+          <li><a href="products/oni-system">The Oni System</a></li>
+          <li><a href="products/training-system">Oni Short Court</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
-          <li><a href="#about">Our Story</a></li>
-          <li><a href="#features">Technology</a></li>
+          <li><a href="#about">Why Oni</a></li>
+          <li><a href="#features">What We're Building</a></li>
+          <li><a href="california">Tournament Page</a></li>
           <li><a href="mailto:caleb@oninets.com">Contact</a></li>
         </ul>
       </div>
@@ -1447,7 +1361,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <div class="footer-bottom">
       <span>© 2026 Oni Nets. All rights reserved.</span>
-      <span>Crafted for gravity-defying play.</span>
+      <span>Built for serious volleyball players.</span>
     </div>
   </footer>
 

@@ -1,6 +1,22 @@
 {
   "version": 2,
-  "routes": [
-    { "src": "/(.*)", "dest": "/$1" }
+  "redirects": [
+    { "source": "/products/outdoor-pro",            "destination": "/products/oni-system",      "permanent": true },
+    { "source": "/products/outdoor-pro.html",       "destination": "/products/oni-system",      "permanent": true },
+    { "source": "/products/indoor-short-court",     "destination": "/products/training-system", "permanent": true },
+    { "source": "/products/indoor-short-court.html","destination": "/products/training-system", "permanent": true },
+    { "source": "/products/anchor-kit",             "destination": "/california",               "permanent": true },
+    { "source": "/products/anchor-kit.html",        "destination": "/california",               "permanent": true },
+    { "source": "/products/onibag",                 "destination": "/california",               "permanent": true },
+    { "source": "/products/onibag.html",            "destination": "/california",               "permanent": true },
+    { "source": "/products/oniball",                "destination": "/california",               "permanent": true },
+    { "source": "/products/oniball.html",           "destination": "/california",               "permanent": true },
+    { "source": "/products/complete-bundle",        "destination": "/california",               "permanent": true },
+    { "source": "/products/complete-bundle.html",   "destination": "/california",               "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/california",                "destination": "/california.html"                },
+    { "source": "/products/oni-system",       "destination": "/products/oni-system.html"       },
+    { "source": "/products/training-system",  "destination": "/products/training-system.html"  }
   ]
 }
